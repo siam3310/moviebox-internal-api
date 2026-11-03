@@ -2,13 +2,11 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { apiUrl, movieApi, MovieItem } from '../../../lib/api';
+import { apiUrl, movieApi } from '../../../lib/api';
 import { 
-  Play, Plus, Star, ChevronLeft, Info, 
-  Clock, Calendar, Languages, Film, X, Zap, 
-  User, Tv, ChevronRight, Pause, RotateCcw, 
-  RotateCw, Settings, Subtitles, Download,
-  Volume2, Maximize, Loader2
+  Plus, Star, ChevronLeft,
+  Clock, Calendar, Languages, Film, X,
+  User, Tv
 } from 'lucide-react';
 import { CollectionGrid } from '../../../components/CollectionGrid';
 import Artplayer from 'artplayer';
