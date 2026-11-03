@@ -3,10 +3,34 @@
   "services": {
     "app": {
       "root": ".",
-      "framework": "nextjs"
+      "framework": "fastapi"
+    },
+    "dashboard": {
+      "root": "dashboard",
+      "framework": "nextjs",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "app",
+          "format": "url",
+          "env": "APP_URL"
+        }
+      ]
     }
   },
   "rewrites": [
+    {
+      "source": "/dashboard",
+      "destination": {
+        "service": "dashboard"
+      }
+    },
+    {
+      "source": "/dashboard/(.*)",
+      "destination": {
+        "service": "dashboard"
+      }
+    },
     {
       "source": "/(.*)",
       "destination": {

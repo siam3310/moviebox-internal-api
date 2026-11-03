@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = '/dashboard/api';
+
+export const apiUrl = (path: string) =>
+  `${API_BASE_URL}${path.startsWith('/') ? path : `/${path}`}`;
 
 // Create axios instance with credentials enabled for session cookies
 const api = axios.create({

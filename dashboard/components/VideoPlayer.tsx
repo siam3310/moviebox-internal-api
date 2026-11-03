@@ -44,10 +44,20 @@ const VideoPlayer = memo(({
             const up = new URL(u);
             cleanUrl = up.searchParams.get('url') || u;
         }
-        if (cleanUrl.includes('localhost') || cleanUrl.includes('127.0.0.1')) {
-            const up = new URL(cleanUrl);
+        const resolvedUrl = new URL(cleanUrl, window.location.origin);
+        const isInternalUrl =
+          resolvedUrl.origin === window.location.origin ||
+          resolvedUrl.pathname.includes('/play-compat/') ||
+          resolvedUrl.pathname.includes('/proxy-media') ||
+          resolvedUrl.pathname.includes('/dashboard/api/');
+
+        if (isInternalUrl) {
+            const up = resolvedUrl;
             if (start && start > 0) up.searchParams.set('start_time', start.toString());
             else up.searchParams.delete('start_time');
+            if (cleanUrl.startsWith('/')) {
+              return `${up.pathname}${up.search}`;
+            }
             return up.toString();
         }
         return cleanUrl;
